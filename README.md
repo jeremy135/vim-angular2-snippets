@@ -31,14 +31,14 @@ ng2-ngSwitch
 
 ####[vundle](https://github.com/gmarik/vundle)
 
-    Plugin 'mhartington/vim-angular2-snippets'
+    Plugin 'jeremy135/vim-angular2-snippets'
 
 to `.vimrc`, and then run `:PluginInstall`.
 
 ####[pathogen.vim](https://github.com/tpope/vim-pathogen)
 
     cd ~/.vim/bundle
-    git clone https://github.com/mhartington/vim-angular2-snippets.git
+    git clone https://github.com/jeremy135/vim-angular2-snippets.git
 
 Then reload vim, run `:Helptags`
 
