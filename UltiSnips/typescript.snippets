@@ -1,98 +1,125 @@
 snippet ng2-component 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-	@Component({
-		moduleId: module.id,
-		selector: '$1',
-		templateUrl: '${2:#:name}.component.html'
-	})
-	export class ${1:#:ComponentName}Component implements OnInit {
-		constructor() { }
+@Component({
+  selector: '$1',
+  templateUrl: '${2:#:name}.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ${1:#:ComponentName}Component implements OnInit {
+  constructor() { }
 
-		ngOnInit() { }
-		${0}
-	}
+  ngOnInit() { }
+  ${0}
+}
 endsnippet
 
 snippet ng2-service
-	import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 
-	@Injectable()
-	export class ${1:#:ServiceName}Service {
-		${0}
-		constructor() { }
+  @Injectable()
+  export class ${1:#:ServiceName}Service {
+    ${0}
+    constructor() { }
 
-	}
+  }
 endsnippet
 
 snippet ng2-pipe
-	import { Pipe, PipeTransform } from '@angular/core';
+  import { Pipe, PipeTransform } from '@angular/core';
 
-	@Pipe({
-		name: '${name}'
-	})
+  @Pipe({
+    name: '${name}'
+  })
 
-	export class ${1:#:PipeName}Pipe implements PipeTransform {
-		transform(value: any, args: any[]): any {
-			${0}
-		}
-	}
+  export class ${1:#:PipeName}Pipe implements PipeTransform {
+    transform(value: any, args: any[]): any {
+      ${0}
+    }
+  }
 endsnippet
 
 snippet ng2-routes
-	@Routes([
-		{ path: '/${1:#:path}', component: ${2:#:Component} }${0}
-	])
+  import { NgModule }             from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+
+  const routes: Routes = [
+    { path: '/${1:#:path}',  component: ${2:#:Component} },
+  ];
+
+  @NgModule({
+    imports: [
+      RouterModule.forChild(routes)
+    ],
+    exports: [
+      RouterModule
+    ]
+  })
+  export class RoutingModule { }
 endsnippet
 
 snippet ng2-route-path
-	{ path: '/${1:#:path}', component: ${2:#:Component} }${0}
+  { path: '/${1:#:path}', component: ${2:#:Component} }${0}
 endsnippet
 
+snippet ng2-module
+  import { NgModule } from '@angular/core';
+  import { CommonModule } from '@angular/common';
+
+  @NgModule({
+    imports: [
+      CommonModule,
+    ],
+    declarations: [],
+    entryComponents: [],
+    providers: [],
+    exports: [],
+  })
+  export class Module { }
+endsnippet
 
 snippet ng2-http-get
-	return this.http.get('${1:#:url}')
-	.map((res: Response) => res.json()${0});
+  return this.http.get('${1:#:url}')
+    .map((res: Response) => res.json()${0});
 endsnippet
 
 snippet ng2-subscribe
-	this.${1:#:service}.${2:#:function}
-	.subscribe(${3:#:arg} => this.${4:#:property} = ${5:#:arg});
-	${0}
+  this.${1:#:service}.${2:#:function}
+  .subscribe(${3:#:arg} => this.${4:#:property} = ${5:#:arg});
+  ${0}
 endsnippet
 
 snippet ng2-bootstrap
-	import { enableProdMode } from '@angular/core';
-	import { bootstrap } from '@angular/platform-browser-dynamic';
+  import { enableProdMode } from '@angular/core';
+  import { bootstrap } from '@angular/platform-browser-dynamic';
 
-	import { ${1:#:AppComponent} } from './${2:#:name}.component';
+  import { ${1:#:AppComponent} } from './${2:#:name}.component';
 
-	// enableProdMode();
+  // enableProdMode();
 
-	bootstrap(${3:#:AppComponent})
-		.then(success => console.log('Bootstrap success'))
-		.catch(error => console.log(error));
-	${0}
+  bootstrap(${3:#:AppComponent})
+    .then(success => console.log('Bootstrap success'))
+    .catch(error => console.log(error));
+  ${0}
 endsnippet
 
 snippet ng2-component-root
-	import { Component } from '@angular/core';
-	import { HTTP_PROVIDERS } from '@angular/http';
-	import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
-	import 'rxjs/Rx'; // load the full rxjs
+  import { Component } from '@angular/core';
+  import { HTTP_PROVIDERS } from '@angular/http';
+  import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+  import 'rxjs/Rx'; // load the full rxjs
 
-	@Component({
-		moduleId: module.id,
-		selector: '${1:#:selector}',
-		templateUrl: '${2:#:name}.component.html',
-		directives: [ROUTER_DIRECTIVES],
-		providers: [
-			HTTP_PROVIDERS,
-			ROUTER_PROVIDERS
-		]
-	})
-	@Routes([
-		${0}
-	])
-	export class AppComponent {}
+  @Component({
+    selector: '${1:#:selector}',
+    templateUrl: '${2:#:name}.component.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [
+      HTTP_PROVIDERS,
+      ROUTER_PROVIDERS
+    ]
+  })
+  @Routes([
+    ${0}
+  ])
+  export class AppComponent {}
 endsnippet
