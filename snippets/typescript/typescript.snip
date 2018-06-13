@@ -1,10 +1,10 @@
 snippet ng2-component
-  import { Component, OnInit } from '@angular/core';
+  import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
   @Component({
-    moduleId: module.id,
     selector: '${1:#:selector}',
-    templateUrl: '${2:#:name}.component.html'
+    templateUrl: '${2:#:name}.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
   })
   export class ${1:#:ComponentName}Component implements OnInit {
     constructor() { }
@@ -37,9 +37,22 @@ snippet ng2-pipe
   }
 
 snippet ng2-routes
-  @Routes([
-    { path: '/${1:#:path}', component: ${2:#:Component} }${0}
-  ])
+  import { NgModule }             from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+ 
+  const heroesRoutes: Routes = [
+    { path: '/${1:#:path}',  component: ${2:#:Component} },
+  ];
+ 
+  @NgModule({
+    imports: [
+      RouterModule.forChild(heroesRoutes)
+    ],
+    exports: [
+      RouterModule
+    ]
+  })
+  export class HeroRoutingModule { }
 
 snippet ng2-route-path
   { path: '/${1:#:path}', component: ${2:#:Component} }${0}
