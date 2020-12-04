@@ -54,7 +54,7 @@ snippet ng2-routes
       RouterModule
     ]
   })
-  export class RoutingModule { }
+  export class ${1:#Name}RoutingModule { }
 
 snippet ng2-route-path
   { path: '/${1:#:path}', component: ${2:#:Component} }${0}
@@ -68,11 +68,10 @@ snippet ng2-module
       CommonModule,
     ],
     declarations: [],
-    entryComponents: [],
     providers: [],
     exports: [],
   })
-  export class Module { }
+  export class ${1:#Name}Module { }
 
 snippet ng2-http-get
   return this.http.get('${1:#:url}')
