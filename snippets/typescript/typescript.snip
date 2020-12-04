@@ -41,6 +41,7 @@ snippet ng2-pipe
 snippet ng2-routes
   import { NgModule }             from '@angular/core';
   import { RouterModule, Routes } from '@angular/router';
+  import { ${2:#:Component} } from '${3:#path}'
  
   const routes: Routes = [
     { path: '/${1:#:path}',  component: ${2:#:Component} },
@@ -55,9 +56,31 @@ snippet ng2-routes
     ]
   })
   export class ${1:#Name}RoutingModule { }
+  
+snippet ng2-routes-lazy
+  import { NgModule }             from '@angular/core';
+  import { RouterModule, Routes } from '@angular/router';
+  import { ${2:#:Component} } from '${3:#path}'
+ 
+  const routes: Routes = [
+    { path: '/${1:#:path}',  loadChildren: () => import('#{2:#:module-path}').then(m => m.${3:#:module-name}) },
+  ];
+ 
+  @NgModule({
+    imports: [
+      RouterModule.forChild(routes)
+    ],
+    exports: [
+      RouterModule
+    ]
+  })
+  export class ${1:#Name}RoutingModule { }
 
 snippet ng2-route-path
   { path: '/${1:#:path}', component: ${2:#:Component} }${0}
+
+snippet ng2-route-path-lazy
+ { path: '/${1:#:path}',  loadChildren: () => import('#{2:#:module-path}').then(m => m.${3:#:module-name}) },
 
 snippet ng2-module
   import { NgModule } from '@angular/core';
